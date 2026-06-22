@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: shopegypt-backend
+    environment:
+      ConnectionStrings__DefaultConnection: "Server=${DB_SERVER};Database=${DB_NAME};User Id=${DB_USER};Password=${DB_PASSWORD};Encrypt=True;TrustServerCertificate=True;MultipleActiveResultSets=True;"      
+      CloudinarySettings__CloudName: "${CLOUDINARY_CLOUDNAME}"
+      CloudinarySettings__ApiKey: "${CLOUDINARY_APIKEY}"
+      CloudinarySettings__ApiSecret: "${CLOUDINARY_APISECRET}"
+      
+      SendGrid__ApiKey: "${SENDGRID_APIKEY}"
+      SendGrid__FromEmail: "${SENDGRID_FROMEMAIL}"
+      SendGrid__FromName: "${SENDGRID_FROMNAME}"
+      
+      Authentication__Google__ClientId: "${GOOGLE_CLIENTID}"
+      Authentication__Google__ClientSecret: "${GOOGLE_CLIENTSECRET}"
+      
+      Authentication__Facebook__AppId: "${FACEBOOK_APPID}"
+      Authentication__Facebook__AppSecret: "${FACEBOOK_APPSECRET}"
+      
+      Stripe__SecretKey: "${STRIPE_SECRETKEY}"
+      Stripe__PublishableKey: "${STRIPE_PUBLISHABLEKEY}"
+      
+      ASPNETCORE_ENVIRONMENT: "Production"
+      ASPNETCORE_URLS: "http://+:80"
+
+    ports:
+      - "8099:80"
+
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge

@@ -111,6 +111,14 @@ namespace ShopEgypt
 
             app.MapRazorPages().WithStaticAssets();
 
+            // Create scope to access services
+            using (var scope = app.Services.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                dbContext.Database.Migrate();
+            }
+
+
             app.Run();
 
 

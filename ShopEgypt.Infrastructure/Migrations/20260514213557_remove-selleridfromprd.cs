@@ -20,7 +20,7 @@ namespace ShopEgypt.Infrastructure.Migrations
                 column: "SellerId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.NoAction);
         }
 
         /// <inheritdoc />
